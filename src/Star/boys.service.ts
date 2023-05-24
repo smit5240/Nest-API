@@ -155,8 +155,8 @@ export class Boyservice {
       let mailTransporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
-          user: 'gelanismit0@gmail.com',
-          pass: 'bxmapwwwmdkvnigy',
+          user: process.env.email,
+          pass: process.env.password,
         },
       });
       let mailDetails = {
@@ -175,17 +175,12 @@ export class Boyservice {
         mobile: verify.mobile,
         otp: OTP,
       };
-      const update = await this.UserModel.findByIdAndUpdate(
-        verify.id,
-        newuserdata,
-      );
-      return res
-        .status(200)
-        .send({
-          status: 'success',
-          message: 'Message Sent Successfully',
-          update,
-        });
+      await this.UserModel.findByIdAndUpdate(verify.id, newuserdata);
+      return res.status(200).send({
+        status: 'success',
+        message: 'Message Sent Successfully',
+        OTP: OTP,
+      });
     } catch (error) {
       return res.status(error.code || 403).send({
         message: error.message || 'Something went wrong',

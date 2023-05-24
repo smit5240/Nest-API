@@ -1,17 +1,7 @@
-import {
-  Body,
-  Controller,
-  Delete,
-  Get,
-  Param,
-  Post,
-  Put,
-  Res,
-} from '@nestjs/common/decorators';
+import { Body, Controller, Post, Res } from '@nestjs/common/decorators';
 import { Boyservice } from './boys.service';
 import { Boys } from './data/boys.dto';
 import { Response } from 'express';
-import { Boy } from './model/boys.schema';
 
 @Controller('boys')
 export class boyscontroller {
